@@ -1,5 +1,59 @@
 <!DOCTYPE html>
 <html>
+<title>Canvas Palette</title>
+<meta charset='utf-8'>
+<head>
+    <title>imgExample</title>
+    <script src="data/4x4.json"></script>
+    <script src="data/32x32.json"></script>
+    <link href="palette/style.css" rel="stylesheet"/>
+</head>
 <body>
+<header>
+    <h1>CodeJam - Pallete</h1>
+</header>
+<main>
+        <div class="menu">
+        <section class="menu__section-for-tools">
+            <div class="menu__section-for-tools__tool">
+                <img src="data/fill_bucket.png"/>
+                <span>Fill bucket</span>
+            </div>
+            <div class="menu__section-for-tools__tool">
+                <img src="data/choose-color.png">
+                <span>Choose color</span>
+            </div>
+            <div class="menu__section-for-tools__tool">
+                <img src="data/pencil.png">
+                <span>Pencil</span>
+            </div>
+            <div class="menu__section-for-tools__tool">
+                <img src="data/transform.png">
+                <span>Transform</span>
+            </div>
+        </section>
+        <section class="menu__section-for-color">
+            <div class="menu__section-for-color__curr-color">
+                <input type="color">
+                <span>Current color</span>
+            </div>
+            <div class="menu__section-for-color__prev-color">
+                <input type="color">
+                <span>Prev color</span>
+            </div>
+            <div class="menu__section-for-color__color">
+                <input type="color">
+                <span>color</span>
+            </div>
+            <div class="menu__section-for-color__prev-color">
+                <input type="color">
+                <span>color</span>
+            </div>
+        </section>
+    </div>
+    <div class="canvas">
+    </div>
+</main>
+
 </body>
 </html>

@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+main{
+    display: flex;
+}
+canvas{
+    image-rendering: pixelated;
+    margin-left: 20px;
+}
+
+header{
+    border-bottom:1px black solid;
+}
+div{
+    display: flex;
+    margin-top: 40px;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 30vh;
+}
+.menu__section-for-tools, .menu__section-for-color {
+    width: 228px;
+    height: 290px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin-left: 100px;
+}
+.menu__section-for-tools__tool{
+    margin-left: 15px;
+    margin-top: 30px;
+}
+
+.menu__section-for-tools__tool:last-child{
+    opacity: 0.4;
+    margin-bottom: 27px;
+}
+
+.menu__section-for-tools__tool span, .menu__section-for-color span{
+    margin-left: 15px;
+}
+
+.menu__section-for-color{
+    margin-top: 50px;
+    padding-bottom: 25px;
+}
+
+.menu__section-for-color  input {
+    border-radius: 50%;
+    height: 28px;
+    width: 30px;
+}
+
