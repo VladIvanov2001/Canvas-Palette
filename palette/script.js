@@ -1,5 +1,5 @@
 function CurrentColor() {
-    return window.getComputedStyle(document.getElementById('Current_color'), null).getPropertyValue('background-color');
+    return window.getComputedStyle(document.getElementById('current_color'), null).getPropertyValue('background-color');
 }
 function Filling(arr) {
     arr.forEach((row) => {
@@ -9,7 +9,6 @@ function Filling(arr) {
         });
     });
 
-    console.log(arr);
     return arr;
 }
 function drawArray(size, arr) {
@@ -46,7 +45,7 @@ const drawRect = function (x, y, width, height, color) {
 function Pencil(x0, y0, x1, y1, deltaX, deltaY) {
     let f = LinearFunction(x0, y0, x1, y1);
     const k = (y1 - y0) / (x1 - x0);
-    const curColor = document.getElementById('Current_color').value.slice(1);
+    const curColor = document.getElementById('current_color').value;
     if (Math.abs(k) < 1) {
         if (x1 > x0) {
             for (let x = x0; x < x1; x += deltaX) {
@@ -75,15 +74,17 @@ function Pencil(x0, y0, x1, y1, deltaX, deltaY) {
     }
 }
 
-function ColorPicker(arr) {
-    document.getElementById('Current_color').style.background = arr[Math.floor(event.offsetY / 128)][Math.floor(event.offsetX / 128)];
+function ColorPicker(event, arr) {
+    document.getElementById('prev_color').style.background = CurrentColor();
+    localStorage.setItem('prev_color', CurrentColor());
+    document.getElementById('current_color').style.background = arr[Math.floor(event.offsetY / 128)][Math.floor(event.offsetX / 128)];
+    localStorage.setItem('current_color', CurrentColor());
 }
 
 window.onload = () => {
     let arr = localStorage.getItem('canvas') ? JSON.parse(localStorage.getItem('canvas')) : smallImg;
     drawArray(4, arr);
     const canvas = document.getElementsByTagName('canvas')[0];
-
     canvas.addEventListener('click', (event) => {
         switch (document.querySelector('.tools-block__tools_item_active').children[1].innerHTML) {
         case 'Pencil':
@@ -91,7 +92,7 @@ window.onload = () => {
             drawArray(4, arr);
             break;
         case 'Choose color':
-            ColorPicker(arr);
+            ColorPicker(event, arr);
             break;
         case 'Paint bucket':
             arr = Filling(arr);
@@ -121,35 +122,41 @@ Array.from(document.getElementsByClassName('tools-block__tools_item')).forEach((
     });
 });
 
-Array.from(document.querySelector('.change')).forEach((element) => {
+Array.from(document.getElementsByClassName('change')).forEach((element) => {
     element.addEventListener('click', () => {
         if (element.children[0].id !== 'prev_color') {
             document.getElementById('prev_color').style.background = CurrentColor();
-            document.getElementById('Current_color').style.background = window.getComputedStyle(element.children[0], null).getPropertyValue('background-color');
+            localStorage.setItem('prev_color', CurrentColor());
+            document.getElementById('current_color').style.background = window.getComputedStyle(element.children[0], null).getPropertyValue('background-color');
+            localStorage.setItem('current_color', CurrentColor());
         } else {
-            document.getElementById('Current_color').style.background = window.getComputedStyle(element.children[0], null).getPropertyValue('background-color');
+            document.getElementById('current_color').style.background = window.getComputedStyle(element.children[0], null).getPropertyValue('background-color');
         }
     });
 });
-
 document.getElementById('color_input').onchange = (event) => {
-    document.getElementById('Current_color').style.background = event.currentTarget.value;
+    document.getElementById('prev_color').style.background = CurrentColor();
+    localStorage.setItem('prev_color', CurrentColor());
+    document.getElementById('current_color').style.background = event.currentTarget.value;
+    localStorage.setItem('current_color', CurrentColor());
 };
 
 document.addEventListener('keydown', (event) => {
     switch (event.key) {
     case 'b':
-        document.querySelector('tools-block__tools_item_active').classList.remove('tools-block__tools_item_active');
-        document.querySelector('tools-block__tools_item').classList.add('tools-block__tools_item_active');
+        document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
+        document.getElementsByClassName('tools-block__tools_item')[0].classList.add('tools-block__tools_item_active');
         break;
     case 'p':
-        document.querySelector('.tools-block__tools_item_active').classList.remove('tools-block__tools_item_active');
-        document.querySelector('.tools-block__tools_item').classList.add('tools-block__tools_item_active');
+        document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
+        document.getElementsByClassName('tools-block__tools_item')[2].classList.add('tools-block__tools_item_active');
         break;
     case 'c':
-        document.querySelector('.tools-block__tools_item_active').classList.remove('tools-block__tools_item_active');
-        document.querySelector('.tools-block__tools_item').classList.add('tools-block__tools_item_active');
+        document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
+        document.getElementsByClassName('tools-block__tools_item')[1].classList.add('tools-block__tools_item_active');
         break;
+
+
     default:
         break;
     }
