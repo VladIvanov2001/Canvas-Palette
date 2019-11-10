@@ -1,59 +1,60 @@
 <!DOCTYPE html>
 <html>
-<title>Canvas Palette</title>
-<meta charset='utf-8'>
 <head>
-    <title>imgExample</title>
-    <script src="data/4x4.json"></script>
-    <script src="data/32x32.json"></script>
-    <link href="palette/style.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>CodeJam-Canvas</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
-    <h1>CodeJam - Pallete</h1>
+        <h1>CodeJam-Canvas</h1>
 </header>
-<main>
-        <div class="menu">
-        <section class="menu__section-for-tools">
-            <div class="menu__section-for-tools__tool">
-                <img src="data/fill_bucket.png"/>
-                <span>Fill bucket</span>
+<menu>
+    <div class="tools-block">
+        <div class="tools-block__tools">
+            <div class="tools-block__tools_item">
+                <img src="./data/fill_bucket.png" alt="">
+                <span>Paint bucket</span>
             </div>
-            <div class="menu__section-for-tools__tool">
-                <img src="data/choose-color.png">
+            <div class="tools-block__tools_item">
+                <img src="./data/choose-color.png" alt="">
                 <span>Choose color</span>
             </div>
-            <div class="menu__section-for-tools__tool">
-                <img src="data/pencil.png">
+            <div class="tools-block__tools_item tools-block__tools_item_active">
+                <img src="./data/pencil.png" alt="">
                 <span>Pencil</span>
             </div>
-            <div class="menu__section-for-tools__tool">
-                <img src="data/transform.png">
+            <div class="tools-block__tools_item">
+                <img src="./data/transform.png" alt="">
                 <span>Transform</span>
             </div>
-        </section>
-        <section class="menu__section-for-color">
-            <div class="menu__section-for-color__curr-color">
-                <input type="color">
+        </div>
+
+        <div class="tools-block__colors">
+            <div class="tools-block__colors_item">
+                <div class="color" id = "Current_color">
+                    <input type="color" id="color_input"></div>
                 <span>Current color</span>
             </div>
-            <div class="menu__section-for-color__prev-color">
-                <input type="color">
+            <div class="tools-block__colors_item change">
+                <div class="color change_color" id = "prev_color"></div>
                 <span>Prev color</span>
             </div>
-            <div class="menu__section-for-color__color">
-                <input type="color">
-                <span>color</span>
+            <hr>
+            <div class="tools-block__colors_item change">
+                <div class="color change_color"></div>
+                <span>red</span>
             </div>
-            <div class="menu__section-for-color__prev-color">
-                <input type="color">
-                <span>color</span>
+            <div class="tools-block__colors_item change">
+                <div class="color change_color"></div>
+                <span>blue</span>
             </div>
-        </section>
+        </div>
     </div>
-    <div class="canvas">
     </div>
-</main>
 
+    <canvas width="512" height="512"></canvas>
+</menu>
+<script src="palette/script.js"></script>
 </body>
 </html>
