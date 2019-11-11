@@ -11,6 +11,7 @@ function FillingBlock(arr, newColor, oldColor, x, y) {
         FillingBlock(arr, newColor, oldColor, x, y - 1);
     }
 }
+
 function drawArray(size, arr) {
     const canvas = document.getElementsByTagName('canvas')[0];
     const ctx = canvas.getContext('2d');
@@ -82,6 +83,8 @@ function ColorPicker(event, arr) {
 }
 
 window.onload = () => {
+    document.getElementById('prev_color').style.background = localStorage.getItem('prev_color') ? localStorage.getItem('prev_color') : '#fff';
+    document.getElementById('current_color').style.background = localStorage.getItem('current_color') ? localStorage.getItem('current_color') : '#fff';
     let arr = localStorage.getItem('canvas') ? JSON.parse(localStorage.getItem('canvas')) : smallImg;
     drawArray(4, arr);
     const canvas = document.getElementsByTagName('canvas')[0];
