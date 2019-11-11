@@ -1,16 +1,17 @@
 function CurrentColor() {
     return window.getComputedStyle(document.getElementById('current_color'), null).getPropertyValue('background-color');
 }
-function Filling(arr) {
-    arr.forEach((row) => {
-        const rows = row;
-        row.forEach((elem, index) => {
-            rows[index] = CurrentColor();
-        });
-    });
+function FillingBlock(arr, newColor, oldColor, x, y) {
+    if (x >= 0 && x < arr.length && y >= 0 && y < arr.length && arr[x][y] === oldColor && arr[x][y] !== newColor) {
+        arr[x][y] = newColor;
 
-    return arr;
+        FillingBlock(arr, newColor, oldColor, x + 1, y);
+        FillingBlock(arr, newColor, oldColor, x - 1, y);
+        FillingBlock(arr, newColor, oldColor, x, y + 1);
+        FillingBlock(arr, newColor, oldColor, x, y - 1);
+    }
 }
+
 function drawArray(size, arr) {
     const canvas = document.getElementsByTagName('canvas')[0];
     const ctx = canvas.getContext('2d');
@@ -87,19 +88,19 @@ window.onload = () => {
     const canvas = document.getElementsByTagName('canvas')[0];
     canvas.addEventListener('click', (event) => {
         switch (document.querySelector('.tools-block__tools_item_active').children[1].innerHTML) {
-        case 'Pencil':
-            Pencil(event, arr);
-            drawArray(4, arr);
-            break;
-        case 'Choose color':
-            ColorPicker(event, arr);
-            break;
-        case 'Paint bucket':
-            arr = Filling(arr);
-            drawArray(4, arr);
-            break;
-        default:
-            break;
+            case 'Pencil':
+                Pencil(event, arr);
+                drawArray(4, arr);
+                break;
+            case 'Choose color':
+                ColorPicker(event, arr);
+                break;
+            case 'Paint bucket':
+                FillingBlock(arr, CurrentColor(), arr[Math.floor(event.offsetY / 128)] [Math.floor(event.offsetX / 128)], [Math.floor(event.offsetY / 128)], [Math.floor(event.offsetX / 128)]);
+                drawArray(4, arr);
+                break;
+            default:
+                break;
         }
 
         localStorage.setItem('canvas', JSON.stringify(arr));
