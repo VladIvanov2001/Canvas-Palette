@@ -146,21 +146,21 @@ document.getElementById('color_input').onchange = (event) => {
 
 document.addEventListener('keydown', (event) => {
     switch (event.key) {
-    case 'b':
-        document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
-        document.getElementsByClassName('tools-block__tools_item')[0].classList.add('tools-block__tools_item_active');
-        break;
-    case 'p':
-        document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
-        document.getElementsByClassName('tools-block__tools_item')[2].classList.add('tools-block__tools_item_active');
-        break;
-    case 'c':
-        document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
-        document.getElementsByClassName('tools-block__tools_item')[1].classList.add('tools-block__tools_item_active');
-        break;
+        case 'b':
+            document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
+            document.getElementsByClassName('tools-block__tools_item')[0].classList.add('tools-block__tools_item_active');
+            break;
+        case 'p':
+            document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
+            document.getElementsByClassName('tools-block__tools_item')[2].classList.add('tools-block__tools_item_active');
+            break;
+        case 'c':
+            document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
+            document.getElementsByClassName('tools-block__tools_item')[1].classList.add('tools-block__tools_item_active');
+            break;
 
 
-    default:
-        break;
+        default:
+            break;
     }
 });
