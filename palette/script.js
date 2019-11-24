@@ -2,7 +2,8 @@ function CurrentColor() {
     return window.getComputedStyle(document.getElementById('current_color'), null).getPropertyValue('background-color');
 }
 function FillingBlock(arr, newColor, oldColor, x, y) {
-    if (x >= 0 && x < arr.length && y >= 0 && y < arr.length && arr[x][y] === oldColor && arr[x][y] !== newColor) {
+    if (x >= 0 && x < arr.length && y >= 0 && y < arr.length
+        && arr[x][y] === oldColor && arr[x][y] !== newColor) {
         arr[x][y] = newColor;
 
         FillingBlock(arr, newColor, oldColor, x + 1, y);
@@ -83,12 +84,15 @@ function ColorPicker(event, arr) {
 }
 
 window.onload = () => {
+
     document.getElementById('prev_color').style.background = localStorage.getItem('prev_color') ? localStorage.getItem('prev_color') : '#fff';
     document.getElementById('current_color').style.background = localStorage.getItem('current_color') ? localStorage.getItem('current_color') : '#fff';
     let arr = localStorage.getItem('canvas') ? JSON.parse(localStorage.getItem('canvas')) : smallImg;
     drawArray(4, arr);
     const canvas = document.getElementsByTagName('canvas')[0];
     canvas.addEventListener('click', (event) => {
+        const startX = Math.floor(event.offsetY / 128);
+        const startY = Math.floor(event.offsetX / 128);
         switch (document.querySelector('.tools-block__tools_item_active').children[1].innerHTML) {
         case 'Pencil':
             Pencil(event, arr);
@@ -98,7 +102,7 @@ window.onload = () => {
             ColorPicker(event, arr);
             break;
         case 'Paint bucket':
-            FillingBlock(arr, CurrentColor(), arr[Math.floor(event.offsetY / 128)] [Math.floor(event.offsetX / 128)], [Math.floor(event.offsetY / 128)], [Math.floor(event.offsetX / 128)]);
+            FillingBlock(arr, CurrentColor(), arr[startX][startY], startX, startY);
             drawArray(4, arr);
             break;
         default:
