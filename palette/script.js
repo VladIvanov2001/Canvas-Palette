@@ -15,7 +15,7 @@ function FillingBlock(arr, newColor, oldColor, x, y) {
 }
 
 function drawArray(size, arr) {
-    const canvas = document.getElementsByTagName('canvas')[0];
+    const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
 
     for (let i = 0; i < arr.length; i += 1) {
@@ -38,7 +38,7 @@ function LinearFunction(x0, y0, x1, y1) {
     return (x) => k * x + b;
 }
 const drawRect = function (x, y, width, height, color) {
-    const canvas = document.getElementsByTagName('canvas')[0];
+    const canvas = document.querySelector('canvas');
     const context = canvas.getContext('2d');
     context.beginPath();
     context.rect(x, y, width, height);
@@ -89,7 +89,7 @@ window.onload = () => {
     document.getElementById('current_color').style.background = localStorage.getItem('current_color') ? localStorage.getItem('current_color') : '#fff';
     let arr = localStorage.getItem('canvas') ? JSON.parse(localStorage.getItem('canvas')) : smallImg;
     drawArray(4, arr);
-    const canvas = document.getElementsByTagName('canvas')[0];
+    const canvas = document.querySelector('canvas');
     canvas.addEventListener('click', (event) => {
         const startX = Math.floor(event.offsetY / 128);
         const startY = Math.floor(event.offsetX / 128);
