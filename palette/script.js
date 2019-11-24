@@ -87,26 +87,26 @@ function ColorPicker(event, arr) {
 window.onload = () => {
     document.getElementById('prev_color').style.background = localStorage.getItem('prev_color') ? localStorage.getItem('prev_color') : '#fff';
     document.getElementById('current_color').style.background = localStorage.getItem('current_color') ? localStorage.getItem('current_color') : '#fff';
-    let arr = localStorage.getItem('canvas') ? JSON.parse(localStorage.getItem('canvas')) : smallImg;
+    const arr = localStorage.getItem('canvas') ? JSON.parse(localStorage.getItem('canvas')) : smallImg;
     drawArray(4, arr);
     const canvas = document.querySelector('canvas');
     canvas.addEventListener('click', (event) => {
         const startX = Math.floor(event.offsetY / 128);
         const startY = Math.floor(event.offsetX / 128);
         switch (document.querySelector('.tools-block__tools_item_active').children[1].innerHTML) {
-            case 'Pencil':
-                Pencil(event, arr);
-                drawArray(4, arr);
-                break;
-            case 'Choose color':
-                ColorPicker(event, arr);
-                break;
-            case 'Paint bucket':
-                FillingBlock(arr, CurrentColor(), arr[startX][startY], startX, startY);
-                drawArray(4, arr);
-                break;
-            default:
-                break;
+        case 'Pencil':
+            Pencil(event, arr);
+            drawArray(4, arr);
+            break;
+        case 'Choose color':
+            ColorPicker(event, arr);
+            break;
+        case 'Paint bucket':
+            FillingBlock(arr, CurrentColor(), arr[startX][startY], startX, startY);
+            drawArray(4, arr);
+            break;
+        default:
+            break;
         }
 
         localStorage.setItem('canvas', JSON.stringify(arr));
@@ -150,21 +150,21 @@ document.getElementById('color_input').onchange = (event) => {
 
 document.addEventListener('keydown', (event) => {
     switch (event.key) {
-        case 'b':
-            document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
-            document.getElementsByClassName('tools-block__tools_item')[0].classList.add('tools-block__tools_item_active');
-            break;
-        case 'p':
-            document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
-            document.getElementsByClassName('tools-block__tools_item')[2].classList.add('tools-block__tools_item_active');
-            break;
-        case 'c':
-            document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
-            document.getElementsByClassName('tools-block__tools_item')[1].classList.add('tools-block__tools_item_active');
-            break;
+    case 'b':
+        document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
+        document.getElementsByClassName('tools-block__tools_item')[0].classList.add('tools-block__tools_item_active');
+        break;
+    case 'p':
+        document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
+        document.getElementsByClassName('tools-block__tools_item')[2].classList.add('tools-block__tools_item_active');
+        break;
+    case 'c':
+        document.getElementsByClassName('tools-block__tools_item_active')[0].classList.remove('tools-block__tools_item_active');
+        document.getElementsByClassName('tools-block__tools_item')[1].classList.add('tools-block__tools_item_active');
+        break;
 
 
-        default:
-            break;
+    default:
+        break;
     }
 });
