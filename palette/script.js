@@ -42,7 +42,7 @@
         const b = y0 - k * x0;
         return (x) => k * x + b;
     }
-    const drawRect = function (x, y, width, height, color) {
+    function drawRect (x, y, width, height, color) {
         const canvas = document.querySelector('canvas');
         const context = canvas.getContext('2d');
         context.beginPath();
@@ -119,7 +119,8 @@
 
         canvas.addEventListener('mousemove', (event) => {
             if (event.which === 1 && document.querySelector('.tools-block__tools_item_active').dataset.tool === 'pencil') {
-                arr[Math.floor(event.offsetY / 128)][Math.floor(event.offsetX / 128)] = currentColor();
+                arr[Math.floor(event.offsetY / 128)]
+                    [Math.floor(event.offsetX / 128)] = currentColor();
                 drawArray(4, arr);
                 localStorage.setItem('canvas', JSON.stringify(arr));
             }
