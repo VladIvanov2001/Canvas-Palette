@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+menu{
+    display: flex;
+    -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+    width: 14%;
+    margin-left: 100px;
+    margin-top: 100px;
+    padding-bottom: 20px;
+}
+
+header {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+}
+
+
+ h1 {
+    font-size: 30px;
+     margin-left: 10px;
+}
+
+.tools-block {
+    width: 14%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tools-block__tools_item, .tools-block__colors_item {
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+}
+
+.tools-block__tools_item:nth-child(1), .tools-block__colors_item:nth-child(1) {
+    margin-top: 20px;
+}
+
+.tools-block__tools_item_active, .tools-block__colors_item_active {
+    background: #75727281;
+}
+
+.tools-block__tools_item {
+    cursor: pointer;
+}
+
+.tools-block__tools_item img {
+    margin-left: 35px;
+}
+
+.tools-block__tools_item span {
+    margin-left: 30px;
+}
+
+.tools-block__tools_item:nth-child(4) {
+    opacity: 0.6;
+}
+
+.tools-block__colors_item {
+    cursor: pointer;
+}
+
+.tools-block__colors_item .color {
+    margin-left: 35px;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    border: 1px solid #9c9999;
+}
+
+.tools-block__colors_item:nth-child(1) .color, .tools-block__colors_item:nth-child(2) .color {
+    background: #fff;
+}
+
+.tools-block__colors_item:nth-child(4) .color {
+    background: #ff0000;
+}
+
+.tools-block__colors_item:nth-child(5) .color {
+    background: #0000ff;
+}
+
+.tools-block__colors_item span {
+    margin-left: 30px;
+}
+
+canvas{
+    width: 512px;
+    height: 512px;
+    background: #a19e9e;
+    margin-left: 500px;
+    border: 1px solid #a19e9e;
+    position: relative;
+    bottom: 600px;
+    left: 200px;
+}
+
+#color_input {
+    opacity: 0;
+    cursor: pointer;
+}
