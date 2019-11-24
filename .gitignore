@@ -1,0 +1,5 @@
+#auto-loaded files
+/node_modules
+
+#files from code-editor
+/.idea
