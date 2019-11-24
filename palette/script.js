@@ -1,4 +1,6 @@
-const curColor = document.getElementById('current_color').value;
+const curColorValue = document.getElementById('current_color').value;
+const curColor = document.getElementById('current_color');
+const prevColor = document.getElementById('prev_color');
 function currentColor() {
     return window.getComputedStyle(document.getElementById('current_color'), null).getPropertyValue('background-color');
 }
@@ -54,12 +56,12 @@ function Pencil(x0, y0, x1, y1, deltaX, deltaY) {
         if (x1 > x0) {
             for (let x = x0; x < x1; x += deltaX) {
                 const y = f(x);
-                drawRect(x, y, deltaX, deltaY, curColor);
+                drawRect(x, y, deltaX, deltaY, curColorValue);
             }
         } else {
             for (let x = x0; x >= x1; x -= deltaX) {
                 const y = f(x);
-                drawRect(x, y, deltaX, deltaY, curColor);
+                drawRect(x, y, deltaX, deltaY, curColorValue);
             }
         }
     } else {
@@ -67,27 +69,28 @@ function Pencil(x0, y0, x1, y1, deltaX, deltaY) {
         if (y1 > y0) {
             for (let y = y0; y < y1; y += deltaY) {
                 const x = f(y);
-                drawRect(x, y, deltaX, deltaY, curColor);
+                drawRect(x, y, deltaX, deltaY, curColorValue);
             }
         } else {
             for (let y = y0; y >= y1; y -= deltaY) {
                 const x = f(y);
-                drawRect(x, y, deltaX, deltaY, curColor);
+                drawRect(x, y, deltaX, deltaY, curColorValue);
             }
         }
     }
 }
 
 function colorPicker(event, arr) {
-    document.getElementById('prev_color').style.background = currentColor();
+    prevColor.style.background = currentColor();
     localStorage.setItem('prev_color', currentColor());
-    document.getElementById('current_color').style.background = arr[Math.floor(event.offsetY / 128)][Math.floor(event.offsetX / 128)];
+    curColor.style.background = arr[Math.floor(event.offsetY / 128)]
+        [Math.floor(event.offsetX / 128)];
     localStorage.setItem('current_color', currentColor());
 }
 
 window.onload = () => {
-    document.getElementById('prev_color').style.background = localStorage.getItem('prev_color') ? localStorage.getItem('prev_color') : '#fff';
-    document.getElementById('current_color').style.background = localStorage.getItem('current_color') ? localStorage.getItem('current_color') : '#fff';
+    prevColor.style.background = localStorage.getItem('prev_color') ? localStorage.getItem('prev_color') : '#fff';
+    curColor.style.background = localStorage.getItem('current_color') ? localStorage.getItem('current_color') : '#fff';
     const arr = localStorage.getItem('canvas') ? JSON.parse(localStorage.getItem('canvas')) : smallImg;
     drawArray(4, arr);
     const canvas = document.querySelector('canvas');
@@ -133,19 +136,19 @@ Array.from(document.getElementsByClassName('tools-block__tools_item')).forEach((
 Array.from(document.getElementsByClassName('change')).forEach((element) => {
     element.addEventListener('click', () => {
         if (element.children[0].id !== 'prev_color') {
-            document.getElementById('prev_color').style.background = currentColor();
+            prevColor.style.background = currentColor();
             localStorage.setItem('prev_color', currentColor());
-            document.getElementById('current_color').style.background = window.getComputedStyle(element.children[0], null).getPropertyValue('background-color');
+            curColor.style.background = window.getComputedStyle(element.children[0], null).getPropertyValue('background-color');
             localStorage.setItem('current_color', currentColor());
         } else {
-            document.getElementById('current_color').style.background = window.getComputedStyle(element.children[0], null).getPropertyValue('background-color');
+            curColor.style.background = window.getComputedStyle(element.children[0], null).getPropertyValue('background-color');
         }
     });
 });
 document.getElementById('color_input').onchange = (event) => {
-    document.getElementById('prev_color').style.background = currentColor();
+    prevColor.style.background = currentColor();
     localStorage.setItem('prev_color', currentColor());
-    document.getElementById('current_color').style.background = event.currentTarget.value;
+    curColor.style.background = event.currentTarget.value;
     localStorage.setItem('current_color', currentColor());
 };
 
