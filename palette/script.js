@@ -1,17 +1,18 @@
-function CurrentColor() {
+const curColor = document.getElementById('current_color').value;
+function currentColor() {
     return window.getComputedStyle(document.getElementById('current_color'), null).getPropertyValue('background-color');
 }
 
-function FillingBlock(arr, newColor, oldColor, x, y) {
+function fillingBlock(arr, newColor, oldColor, x, y) {
     if (x >= 0 && x < arr.length && y >= 0 && y < arr.length
         && arr[x][y] === oldColor && arr[x][y] !== newColor) {
         const array = arr;
         array[x][y] = newColor;
 
-        FillingBlock(arr, newColor, oldColor, x + 1, y);
-        FillingBlock(arr, newColor, oldColor, x - 1, y);
-        FillingBlock(arr, newColor, oldColor, x, y + 1);
-        FillingBlock(arr, newColor, oldColor, x, y - 1);
+        fillingBlock(arr, newColor, oldColor, x + 1, y);
+        fillingBlock(arr, newColor, oldColor, x - 1, y);
+        fillingBlock(arr, newColor, oldColor, x, y + 1);
+        fillingBlock(arr, newColor, oldColor, x, y - 1);
     }
 }
 
@@ -33,7 +34,7 @@ const smallImg = [
     ['#FFEB3B', '#FFC107', '#FFC107', '#FFEB3B'],
     ['#00BCD4', '#FFEB3B', '#FFEB3B', '#00BCD4'],
 ];
-function LinearFunction(x0, y0, x1, y1) {
+function linearFunction(x0, y0, x1, y1) {
     const k = (y1 - y0) / (x1 - x0);
     const b = y0 - k * x0;
     return (x) => k * x + b;
@@ -47,9 +48,8 @@ const drawRect = function (x, y, width, height, color) {
     context.fill();
 };
 function Pencil(x0, y0, x1, y1, deltaX, deltaY) {
-    let f = LinearFunction(x0, y0, x1, y1);
+    let f = linearFunction(x0, y0, x1, y1);
     const k = (y1 - y0) / (x1 - x0);
-    const curColor = document.getElementById('current_color').value;
     if (Math.abs(k) < 1) {
         if (x1 > x0) {
             for (let x = x0; x < x1; x += deltaX) {
@@ -63,7 +63,7 @@ function Pencil(x0, y0, x1, y1, deltaX, deltaY) {
             }
         }
     } else {
-        f = LinearFunction(y0, x0, y1, x1);
+        f = linearFunction(y0, x0, y1, x1);
         if (y1 > y0) {
             for (let y = y0; y < y1; y += deltaY) {
                 const x = f(y);
@@ -78,11 +78,11 @@ function Pencil(x0, y0, x1, y1, deltaX, deltaY) {
     }
 }
 
-function ColorPicker(event, arr) {
-    document.getElementById('prev_color').style.background = CurrentColor();
-    localStorage.setItem('prev_color', CurrentColor());
+function colorPicker(event, arr) {
+    document.getElementById('prev_color').style.background = currentColor();
+    localStorage.setItem('prev_color', currentColor());
     document.getElementById('current_color').style.background = arr[Math.floor(event.offsetY / 128)][Math.floor(event.offsetX / 128)];
-    localStorage.setItem('current_color', CurrentColor());
+    localStorage.setItem('current_color', currentColor());
 }
 
 window.onload = () => {
@@ -100,10 +100,10 @@ window.onload = () => {
             drawArray(4, arr);
             break;
         case 'Choose color':
-            ColorPicker(event, arr);
+            colorPicker(event, arr);
             break;
         case 'Paint bucket':
-            FillingBlock(arr, CurrentColor(), arr[startX][startY], startX, startY);
+            fillingBlock(arr, currentColor(), arr[startX][startY], startX, startY);
             drawArray(4, arr);
             break;
         default:
@@ -115,7 +115,7 @@ window.onload = () => {
 
     canvas.addEventListener('mousemove', (event) => {
         if (event.which === 1 && document.getElementsByClassName('tools-block__tools_item_active')[0].children[1].innerHTML === 'Pencil') {
-            arr[Math.floor(event.offsetY / 128)][Math.floor(event.offsetX / 128)] = CurrentColor();
+            arr[Math.floor(event.offsetY / 128)][Math.floor(event.offsetX / 128)] = currentColor();
             drawArray(4, arr);
             localStorage.setItem('canvas', JSON.stringify(arr));
         }
@@ -133,20 +133,20 @@ Array.from(document.getElementsByClassName('tools-block__tools_item')).forEach((
 Array.from(document.getElementsByClassName('change')).forEach((element) => {
     element.addEventListener('click', () => {
         if (element.children[0].id !== 'prev_color') {
-            document.getElementById('prev_color').style.background = CurrentColor();
-            localStorage.setItem('prev_color', CurrentColor());
+            document.getElementById('prev_color').style.background = currentColor();
+            localStorage.setItem('prev_color', currentColor());
             document.getElementById('current_color').style.background = window.getComputedStyle(element.children[0], null).getPropertyValue('background-color');
-            localStorage.setItem('current_color', CurrentColor());
+            localStorage.setItem('current_color', currentColor());
         } else {
             document.getElementById('current_color').style.background = window.getComputedStyle(element.children[0], null).getPropertyValue('background-color');
         }
     });
 });
 document.getElementById('color_input').onchange = (event) => {
-    document.getElementById('prev_color').style.background = CurrentColor();
-    localStorage.setItem('prev_color', CurrentColor());
+    document.getElementById('prev_color').style.background = currentColor();
+    localStorage.setItem('prev_color', currentColor());
     document.getElementById('current_color').style.background = event.currentTarget.value;
-    localStorage.setItem('current_color', CurrentColor());
+    localStorage.setItem('current_color', currentColor());
 };
 
 document.addEventListener('keydown', (event) => {
