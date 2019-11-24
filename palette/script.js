@@ -5,7 +5,8 @@ function CurrentColor() {
 function FillingBlock(arr, newColor, oldColor, x, y) {
     if (x >= 0 && x < arr.length && y >= 0 && y < arr.length
         && arr[x][y] === oldColor && arr[x][y] !== newColor) {
-        arr[x][y] = newColor;
+        const array = arr;
+        array[x][y] = newColor;
 
         FillingBlock(arr, newColor, oldColor, x + 1, y);
         FillingBlock(arr, newColor, oldColor, x - 1, y);
