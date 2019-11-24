@@ -97,15 +97,15 @@ window.onload = () => {
     canvas.addEventListener('click', (event) => {
         const startX = Math.floor(event.offsetY / 128);
         const startY = Math.floor(event.offsetX / 128);
-        switch (document.querySelector('.tools-block__tools_item_active').children[1].innerHTML) {
-        case 'Pencil':
+        switch (document.querySelector('.tools-block__tools_item_active').dataset.tool) {
+        case 'pencil':
             Pencil(event, arr);
             drawArray(4, arr);
             break;
-        case 'Choose color':
+        case 'chooseColor':
             colorPicker(event, arr);
             break;
-        case 'Paint bucket':
+        case 'paintBucket':
             fillingBlock(arr, currentColor(), arr[startX][startY], startX, startY);
             drawArray(4, arr);
             break;
@@ -117,7 +117,7 @@ window.onload = () => {
     });
 
     canvas.addEventListener('mousemove', (event) => {
-        if (event.which === 1 && document.getElementsByClassName('tools-block__tools_item_active')[0].children[1].innerHTML === 'Pencil') {
+        if (event.which === 1 && document.querySelector('.tools-block__tools_item_active').dataset.tool === 'pencil') {
             arr[Math.floor(event.offsetY / 128)][Math.floor(event.offsetX / 128)] = currentColor();
             drawArray(4, arr);
             localStorage.setItem('canvas', JSON.stringify(arr));
